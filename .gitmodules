@@ -1,0 +1,3 @@
+[submodule "example-submission-repository"]
+	path = example-submission-repository
+	url = https://github.com/fullstack-hy2020/example-submission-repository.git

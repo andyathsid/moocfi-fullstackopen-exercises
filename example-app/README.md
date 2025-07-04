@@ -1,0 +1,1 @@
+Collection of example apps used in each chapter of the course.
