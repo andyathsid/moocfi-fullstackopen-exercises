@@ -17,18 +17,21 @@ const Content = ({ parts }) => {
 }
 
 const Total = ({ parts }) => {
-  let total = 0
-  parts.forEach(part => { total += part.exercises })
-  return <p>Number of exercises {total}</p>
+  let total = parts.reduce((sum, part) => sum + part.exercises, 0)
+  return <b>Total of {total} exercises</b>
 }
 
-const Course = ({ course }) => {
 
+const Course = ({ courses }) => {
   return (
     <div>
-      <Header course={course.name} />
-      <Content parts={course.parts} />
-      <Total parts={course.parts} />
+      {courses.map(course =>
+        <div key={course.id}>
+          <Header course={course.name} />
+          <Content parts={course.parts} />
+          <Total parts={course.parts} />
+        </div>
+      )}
     </div>
   )
 }
