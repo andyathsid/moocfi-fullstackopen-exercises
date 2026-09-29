@@ -37,3 +37,8 @@ lerna-debug.log*
 # Operating system files
 .DS_Store
 Thumbs.db
+
+# For exercise part 3 deployment
+!part3/phonebook/backend/dist/
+!part3/phonebook/backend/dist/**
+

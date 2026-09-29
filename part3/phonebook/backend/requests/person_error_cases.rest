@@ -1,0 +1,29 @@
+@personsUrl = http://localhost:3001/api/persons
+
+# Expected response: 400 Bad Request because name is missing.
+POST {{personsUrl}}
+Content-Type: application/json
+
+{
+  "number": "040-1234567"
+}
+
+###
+
+# Expected response: 400 Bad Request because number is missing.
+POST {{personsUrl}}
+Content-Type: application/json
+
+{
+  "name": "Missing Number"
+}
+
+###
+
+# Expected response: 400 Bad Request from the error handler middleware.
+GET {{personsUrl}}/not-a-valid-object-id
+
+###
+
+# Expected response: 404 Not Found from the unknown endpoint middleware.
+GET http://localhost:3001/api/unknown

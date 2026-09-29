@@ -1,0 +1,45 @@
+@baseUrl = http://localhost:3001
+@personsUrl = {{baseUrl}}/api/persons
+
+# 1. Run this request first. Its response ID is reused below.
+# @name createPerson
+POST {{personsUrl}}
+Content-Type: application/json
+
+{
+  "name": "REST Client Test Person",
+  "number": "040-1234567"
+}
+
+###
+
+@personId = {{createPerson.response.body.$.id}}
+
+# 2. Fetch the person created above.
+GET {{personsUrl}}/{{personId}}
+
+###
+
+# 3. Update the person's phone number.
+PUT {{personsUrl}}/{{personId}}
+Content-Type: application/json
+
+{
+  "name": "REST Client Test Person",
+  "number": "050-7654321"
+}
+
+###
+
+# 4. Verify that /info reads the count from the database.
+GET {{baseUrl}}/info
+
+###
+
+# 5. Delete the person created above.
+DELETE {{personsUrl}}/{{personId}}
+
+###
+
+# 6. Run after DELETE. Expected response: 404 Not Found.
+GET {{personsUrl}}/{{personId}}
