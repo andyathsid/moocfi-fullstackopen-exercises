@@ -86,9 +86,9 @@ function App() {
             setNewNumber('')
           }
         )
-        .catch(() => {
+        .catch((error) => {
           setNotification({
-            message: `Could not add ${newName}. Please try again.`,
+            message: `Could not add ${newName}. Please try again. Error message: ${error.response?.data?.error ?? 'Unknown error'}`,
             type: 'error',
           })
         })
