@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:3001/api/notes
+
+# 1. Run this request first. Its response ID is reused below.
+# @name createNote
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "content": "Note created with REST Client",
+  "important": true
+}
+
+###
+
+@noteId = {{createNote.response.body.$.id}}
+
+# 2. Run after createNote.
+PUT {{baseUrl}}/{{noteId}}
+Content-Type: application/json
+
+{
+  "content": "Note updated with REST Client",
+  "important": false
+}
+
+###
+
+# 3. Run after the update request.
+DELETE {{baseUrl}}/{{noteId}}
+
+###
+
+# This independent request tests the 400 response when content is missing.
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "important": false
+}
